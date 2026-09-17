@@ -18,9 +18,59 @@ function jogo()
     end = false;
 
     Dica.textContent = "Digite seu palpite, boa sorte.";
-    Tentativa.textContent = 'Chutes restantes: ${tentativasRestantes}';
+    Tentativa.textContent = 'Chutes restantes: '${tentativasRestantes};
 
     Palpite.value = "";
     Palpite.focus();
     Chute.disabled = false;
+}
+
+function Chute()
+{
+    if(end) return;
+
+    let MN = parseInt(Palpite.value);
+
+    if(isNaN(MN) || MN < min || MN > max)
+    {
+        Dica.textContent = 'Digite um número entre 1 e 100.';
+        Palpite.focus;
+        return;
+    }
+
+    tentativasRestantes --;
+
+    if(MN ===numero)
+    {
+        Dica.textContent = 'você acertou o número' ${MN};
+        end(true);
+        return;
+    }
+
+    if(MN < numero)
+    {
+        Dica.textContent = 'Onúmero é maior que ' ${MN};
+    }
+    else
+    {
+        Dica.textContent = 'Onúmero é menor que ' ${MN};
+    }
+
+    Tentativa,textContent = 'Tentativas restantes: ' ${tentativasRestantes};
+
+    if(tentativasRestantes <= 0)
+    {
+        Dica.textContent = 'Você perdeu tentativas esgotadas! O número misterioso era ' ${numero};
+        end(false);
+    }
+
+    Palpite.value = "";
+    Palpite.focus();
+}
+
+function Termina(win)
+{
+    end = true;
+    Chute.disabled = true;
+    Palpite.disabled = true;
 }
